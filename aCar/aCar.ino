@@ -85,7 +85,6 @@ void loop() {
     }
   } else {
     goForwards(speedA, speedB, speedC, SpeedD) {
-
     }
     pixy.setLED(250, 0, 0);
   }
