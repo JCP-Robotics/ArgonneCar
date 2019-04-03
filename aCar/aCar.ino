@@ -13,6 +13,13 @@
 #define X_CENTER (pixy.frameWidth/2)
 #define LINE_MODE_TURN_DELAYED
 
+
+/* May or may not be correct
+    A corresponds to in5 and in6 and speedA
+    B corresponds to in1 and in2 and speedB
+    C corresponds to in3 and in4 and speedC
+    D corresponds to in7 and in8 and speedD
+*/
 Pixy2 pixy;
 int32_t error;
 int tolerance = 6;
@@ -31,10 +38,10 @@ int enD = 11;
 int in7 = 12;
 int in8 = 13;
 
-int speedA;
-int speedB;
-int speedC;
-int speedD;
+int speedA = 100;
+int speedB = 100;
+int speedC = 100;
+int speedD = 100;
 
 void setup() {
   Serial.begin(9600);
@@ -58,41 +65,23 @@ void setup() {
 
 
 }
+void turnLeft(int a, int b, int c, int d) {
 
-void loop() {
-  int speedA;
-  int speedB;
-  int speedC;
-  int speedD;
-  int res;
-  res = pixy.line.getMainFeatures();
-  if (res >= 0) {
-    //pixy.setLED(0,0,250);
-    pixy.line.getAllFeatures();
-    error = (int32_t)pixy.line.vectors->m_x1 - (int32_t)X_CENTER;
-    Serial.print("Error: "); Serial.println(error);
-    delay(500);
-    if (error > tolerance) {
-      while (error > tolerance) {
-        //Turn left
-      }
-      pixy.setLED(0, 0, 250);
-    } else if (error < tolerance) {
-      while (error < tolerance) {
-        //Turn Right
-        pixy.setLED(0, 250, 0);
-      }
-    }
-  } else {
-    goForwards(speedA, speedB, speedC, SpeedD) {
-    }
-    pixy.setLED(250, 0, 0);
-  }
+  //decrease speed on left side of car
+  a -= 4;
+  b -= 4;
+  c += 4;
+  d += 4;
 
 
-}
+} void turnRight(int a, int b, int c, int d) {
+  //decrease speed on right side
+  a -= 4;
+  b -= 4;
+  c += 4;
+  d += 4;
 
-void goForwards(int speedA, int speedB, int speedC, int speedD) {
+}void goForwards(int speedA, int speedB, int speedC, int speedD) {
   digitalWrite(in1, LOW);
   digitalWrite(in2, HIGH);
   analogWrite(enA, speedA);
@@ -107,12 +96,89 @@ void goForwards(int speedA, int speedB, int speedC, int speedD) {
   digitalWrite(in8, HIGH);
   analogWrite(enD, speedD);
 }
+void loop() {
 
-void turnLeft() {
+ /* int res;
+  res = pixy.line.getMainFeatures();
+  if (res >= 0) {
+    goForwards(speedA, speedB, speedC, speedD);
+    while (res >= 0) {
+      //pixy.setLED(0,0,250);
+      pixy.line.getAllFeatures();
+      error = (int32_t)pixy.line.vectors->m_x1 - (int32_t)X_CENTER;
+      Serial.print("Error: "); Serial.println(error);
+      //Serial.println(speedA); Serial.println(speedB); Serial.println(speedC); Serial.println(speedD);
+      Serial.print("SpeedA: "); Serial.println(speedA); Serial.print("SpeedB: "); Serial.println(speedB); Serial.print("SpeedC: "); Serial.println(speedC); Serial.print("SpeedD: " ); Serial.println(speedD);
+      delay(250);
 
-  //decrease speed on left side of car
+      if (error > tolerance) {
+
+        //Turn left
+        speedA -= 4;
+        speedB -= 4;
+        speedC += 4;
+        speedD += 4;
+
+        if (speedA < 60) {
+          speedA = 60;
+        }
+        if (speedB < 60) {
+          speedB = 60;
+        }
+        if (speedC > 100) {
+          speedC = 100;
+        }
+        if (speedD > 100) {
+          speedD = 100;
+        }
+        delay(200);
+        pixy.setLED(0, 0, 250);
+      } if (error < tolerance) {
+
+        //Turn Right
+        speedA += 4;
+        speedB += 4;
+        speedC -= 4;
+        speedD -= 4;
+        if (speedA > 100) {
+          speedA = 100;
+        }
+        if (speedB > 100) {
+          speedB = 100;
+        }
+        if (speedC < 60) {
+          speedC = 60;
+        }
+        if (speedD < 60) {
+          speedD = 60;
+        }
+
+        delay(200);
+        pixy.setLED(0, 250, 0);
+
+      }
+    }
+    
+  }
+  else {
+    //rotate();
+
+   
+    pixy.setLED(250, 0, 0);
+
+  }*/goForwards(100, 100, 100, 100);
+
 
 }
-void turnRight() {
-  //decrease speed on right side
+void stop() {
+
+
+}
+
+
+
+
+
+void rotate() {
+  //rotate the robot
 }
