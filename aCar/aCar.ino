@@ -98,7 +98,7 @@ void turnLeft(int a, int b, int c, int d) {
 }
 void loop() {
 
- /* int res;
+  int res;
   res = pixy.line.getMainFeatures();
   if (res >= 0) {
     goForwards(speedA, speedB, speedC, speedD);
@@ -166,7 +166,7 @@ void loop() {
    
     pixy.setLED(250, 0, 0);
 
-  }*/goForwards(100, 100, 100, 100);
+  }
 
 
 }
