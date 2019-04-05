@@ -20,6 +20,10 @@
     C corresponds to in3 and in4 and speedC
     D corresponds to in7 and in8 and speedD
 */
+
+/* Display picture/vector on the screen*/
+
+
 Pixy2 pixy;
 int32_t error;
 int tolerance = 6;
@@ -170,10 +174,7 @@ void loop() {
 
 
 }
-void stop() {
 
-
-}
 
 
 
